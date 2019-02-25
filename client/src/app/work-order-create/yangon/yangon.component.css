@@ -1,0 +1,21 @@
+.card{
+    min-height: 500px;
+}
+.card-title{
+    padding:1em;
+    background: #563d7c;
+    color:white;
+    margin-bottom:0px;
+}
+.card-body{ padding: 0px;}
+.card-body > div{   padding:0px 5px; }
+
+
+ mat-form-field{    width: 100%;    }
+ .mat-option:hover{    background-color: bisque;  }
+
+ input.form-control{
+    border: 0px;
+    border-bottom: solid .4px;
+ }
+

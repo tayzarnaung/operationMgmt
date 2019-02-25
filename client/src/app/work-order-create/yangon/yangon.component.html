@@ -1,0 +1,199 @@
+<!-- {{registrationForm.value | json}} <br>  {{registrationForm.errors | json}} -->
+
+<form [formGroup]="registrationForm" (ngSubmit)="onFormSubmit()" nonvalidate>
+  <div class="row">
+
+
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Contact Information</h5>
+
+          <div formGroupName="customerForm">
+
+            <div class="form-group">
+              <input class="form-control" placeholder="Customer Name" formControlName="cname">
+              <small *ngIf="cnameFn.invalid && cnameFn.touched" class="text-danger">required</small>
+            </div>
+
+            <div class="form-group row">
+              <div class="col">
+                <input class="form-control" placeholder="Phone Number" formControlName="ph1">
+                <small [class.d-none]="registrationForm.get('customerForm.ph1').valid || ph1Fn.untouched" class="text-danger">required</small>
+              </div>
+              <div class="col">
+                <input class="form-control" placeholder="Phone Number" formControlName="ph2">
+                <small *ngIf="registrationForm.get('customerForm.ph2').invalid && ph2Fn.touched" class="text-danger">required</small>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <input class="form-control" placeholder="House No" formControlName="houseNo">
+                <small *ngIf="houseNoFn.invalid && houseNoFn.touched" class="text-danger">required</small>
+              </div>
+              <div class="col-sm-6">
+                <input class="form-control" placeholder="floor & room" formControlName="floor_room">
+                <small *ngIf="floor_roomFn.invalid && floor_roomFn.touched" class="text-danger">required</small>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- -  - - - - - - - - Customer  -  - - - - - - - -  -->
+
+
+          <!-- -  - - - - - - - - Address  -  - - - - - - - -  -->
+          <div formGroupName="addressForm">
+
+            <div class="form-group row">
+              <div class="col">
+                <select name="zone" class="form-control" formControlName="zone">
+                  <option value='' disabled selected>Zone </option>
+                  <option *ngFor="let zone of zone">{{zone}}</option>
+                </select>
+                <span [class.d-none]="zoneFn.valid || zoneFn.untouched" class="text-danger">required</span>
+              </div>
+              <!-- <div class="col" *ngIf="otherCondition">
+                  <input class="form-control" placeholder="Type zone here" style="border-bottom:1px solid black;">
+                </div> -->
+            </div>
+
+            <div class="form-group row">
+              <div class="col">
+                <mat-form-field>
+                  <input placeholder="Township" formControlName="township" matInput [matAutocomplete]="township">
+                  <mat-autocomplete #township="matAutocomplete" autoActiveFirstOption>
+                    <mat-option *ngFor="let town of autoTownship | async" [value]="town">
+                      {{town}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <input placeholder="Ward" formControlName="ward" matInput [matAutocomplete]="ward">
+                  <mat-autocomplete #ward="matAutocomplete" autoActiveFirstOption>
+                    <mat-option *ngFor="let ward of autoWard | async" [value]="ward">
+                      {{ward}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <input placeholder="Street" formControlName="street" matInput [matAutocomplete]="street">
+                  <mat-autocomplete #street="matAutocomplete" autoActiveFirstOption>
+                    <mat-option *ngFor="let street of autoStreet | async" [value]="street">
+                      {{street}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+          <!-- -  - - - - - - - - Address  -  - - - - - - - -  -->
+
+        </div>
+      </div>
+    </div> <!-- end contact info column -->
+
+
+
+    <!-- -  - - - - - - - - Order Information  -  - - - - - - - -  -->
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Order Information</h5>
+
+
+          <div formGroupName="orderForm">
+            <div class="form-group mt-2">
+              <input formControlName="order_id" class="form-control" placeholder="Order Id" [class.is-invalid]="order_idFn.invalid && order_idFn.touched">
+
+              <div *ngIf="order_idFn.errors &&order_idFn.invalid && order_idFn.touched" class="text-danger">
+                <span *ngIf="order_idFn.errors.required">
+                  required
+                </span>
+              </div>
+              <span *ngIf="order_id_exist && order_idFn.dirty" class="text-danger">{{order_id_exist}}</span>
+            </div>
+
+            <div class="form-group">
+              <input class="form-control" placeholder="Order Poster" formControlName="orderPoster" [class.is-invalid]="this.registrationForm.get('orderForm.orderPoster').invalid && this.registrationForm.get('orderForm').get('orderPoster').touched">
+              <span *ngIf="orderPosterFn.errors && orderPosterFn.invalid && orderPosterFn.touched" class="text-danger">
+                <small *ngIf="orderPosterFn.errors.required">required</small>
+                <small *ngIf="orderPosterFn.errors.minlength">minimum length is 3</small>
+              </span>
+            </div>
+
+            <div class="form-group row">
+              <div class="col">
+                <select name="planType" class="form-control" formControlName="planType">
+                  <option value="" selected disabled>Plan Type</option>
+                  <option *ngFor="let plan of planType">{{plan}}</option>
+                </select>
+                <small [class.d-none]="planTypeFn.valid || planTypeFn.untouched"  class="text-danger">required</small>
+              </div>
+              <div class="col">
+                <select name="cpeType" class="form-control" formControlName="cpeType">
+                  <option value="" selected disabled class="text-info">CPE Type</option>
+                  <option *ngFor="let cpe of cpeType">{{cpe}}</option>
+                </select>
+                <small *ngIf="cpeTypeFn.invalid && cpeTypeFn.touched" class="text-danger">required</small>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col">
+                <select name="useType" class="form-control" formControlName="useType">
+                  <option value="" selected disabled>Use Type</option>
+                  <option *ngFor="let use of useType">{{use}}</option>
+                </select>
+              </div>
+              <div class="col">
+                <select name="orderChannel" class="form-control" formControlName="orderChannel">
+                  <option value="" selected disabled>Order Channel</option>
+                  <option *ngFor="let channel of orderChannel">{{channel}}</option>
+                </select>
+              </div>
+            </div>
+
+            <select name="how_u_know" class="form-control" formControlName="how_u_know">
+              <option value="" selected disabled>How do you know myanmar net?</option>
+              <option *ngFor="let item of how_u_know">{{item}}</option>
+            </select>
+
+            <div class="form-group row mt-5">
+              <div class="col">
+                <input formControlName="remark" class="form-control" placeholder="remark" [class.is-invalid]="remarkFn.invalid && remarkFn.touched">
+                <span *ngIf="remarkFn.invalid && remarkFn.touched" class="text-danger">required</span>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="toInstall" id="myCheck" formControlName="toInstall">
+              <label for="myCheck"> To install</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> <!-- //end order info column -->
+
+
+
+    <div class="form-group mt-5">
+      <div class="row ml-auto d-block">
+        <button type="reset" class="btn btn-danger mx-2">Reset</button>
+        <button type="submit" class="btn btn-success" [disabled]="!registrationForm.valid" [class.btn-danger]="!registrationForm.valid">Submit</button>
+      </div>
+    </div>
+    <!-- [disabled]="!registrationForm.valid" [class.btn-danger]="!registrationForm.valid" -->
+
+  </div> <!-- end row -->
+</form>

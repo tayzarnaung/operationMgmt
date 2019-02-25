@@ -1,0 +1,107 @@
+<mat-toolbar>
+  <span>Customer's Order Detail</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form class="normal-form" (submit)="onSubmit()">
+  <mat-grid-list cols="3" rowHeight="200px">
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input matInput placeholder="Order Id" [value]="tempAddressServ.orderForm?.order_id" readonly>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Order Poster" [value]="tempAddressServ.orderForm?.orderPoster" readonly>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="to install" [value]="tempAddressServ.orderForm?.toInstall" readonly>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input matInput placeholder="Plan Type" [value]="tempAddressServ.orderForm?.planType" readonly>
+          <!-- <mat-error *ngIf="tempAddressServ.form.get('ward').errors?.required">This field is mandatory.</mat-error> -->
+          <!-- <mat-error *ngIf="tempAddressServ.form.controls['ward'].errors?.minlength">Minimum 3 charactors needed.</mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="CPE Type" [value]="tempAddressServ.orderForm?.cpeType" readonly>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="remark" [value]="tempAddressServ.orderForm?.remark" readonly>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input matInput placeholder="Use Type" [value]="tempAddressServ.orderForm?.useType" readonly>
+          <!-- <mat-error *ngIf="tempAddressServ.form.get('ward').errors?.required">This field is mandatory.</mat-error> -->
+          <!-- <mat-error *ngIf="tempAddressServ.form.controls['ward'].errors?.minlength">Minimum 3 charactors needed.</mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Order Channel" [value]="tempAddressServ.orderForm?.orderChannel" readonly>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="how do you know?" [value]="tempAddressServ.orderForm?.how_u_know" readonly>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <div class="button-row">
+    <mat-form-field class="mx-5">
+      <mat-select placeholder="Status" [(ngModel)]="selectedStatus" name="status" required>
+         <!-- [(value)]="selectedStatus" -->
+        <mat-option *ngFor="let value of status" [value]="value">
+          {{value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <button mat-raised-button color="primary" *ngIf="true">Submit</button> -->
+    <span class="btn btn-primary" *ngIf="selectedStatus" (click)="onClick(tempAddressServ.orderForm?.order_id)">Submit</span>
+  </div>
+</form>
+
+
+
+
+
+<!-- <mat-grid-tile>
+        <div class="controles-container">
+          <div class="add-bottom-padding">
+            <mat-radio-group formControlName="gender">1234
+              <mat-radio-button value="1">Male</mat-radio-button>
+              <mat-radio-button value="2">Female</mat-radio-button>
+              <mat-radio-button value="3">Other</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-form-field>
+            <mat-select formControlName="department" placeholder="Department">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let department of departmentService.array">
+                <mat-option value="{{department.$key}}">{{department.code}}-{{department.name}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Hire Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="add-bottom-padding">
+            <mat-checkbox formControlName="isPermanent">Permanent Employee</mat-checkbox>
+          </div>
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+          </div>
+        </div>
+      </mat-grid-tile> -->
