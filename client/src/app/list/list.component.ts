@@ -51,7 +51,7 @@ export class ListComponent implements OnInit {
 
     this.operationService.getOperation().subscribe(operation => { //object
       this.operation = operation;
-      // console.log(this.operation);
+      console.log(this.operation);
 
 
       this.customers = this.operation["customers"]  //object    
