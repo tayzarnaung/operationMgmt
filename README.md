@@ -32,7 +32,8 @@ sudo apt-get install -y nodejs
 npm -v
 node -v
 node
-console.log('hi')
+	console.log('hi')
+node node_test.js(from nodejs.org/en/about)
 
 sudo npm install -g @angular/cli
 sudo npm unistall -g @angular/cli
