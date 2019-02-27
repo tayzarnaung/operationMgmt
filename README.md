@@ -1,6 +1,6 @@
 Download xampp from https://www.apachefriends.org/download.html
 
-change this downloade xampp to executable by:
+change this downloaded xampp to executable by:
 	sudo chmod +x xampp-installer.run
 check by:
 	ls -al xampp-installer.run
