@@ -28,7 +28,11 @@ to install angular 7,
 sudo apt install curl
 curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
 sudo apt-get install -y nodejs
+
 npm -v
+node -v
+node
+console.log('hi')
 
 sudo npm install -g @angular/cli
 sudo npm unistall -g @angular/cli
