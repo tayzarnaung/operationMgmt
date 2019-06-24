@@ -38,10 +38,18 @@ node node_test.js(from nodejs.org/en/about)
 sudo npm install -g @angular/cli
 sudo npm unistall -g @angular/cli
 
+delete vendor
+composer update
+php artisan key:generate ,if No application encryption key has been specified.
+copy .env file
+create database operationMgmt
 
-	
+php artisan serve
+npm start
 
 
 
-
-
+ Laravel's log file located at /public/storage/logs/laravel-<date>.log (above laravel 5.0)Monitor the log - linux/osx:
+  	tail -f /laravel/storage/logs/laravel-<date>.log
+  	tail -f storage/logs/laravel-2019-02-28.log
+  	Log::info(Address::all());	Log::error("hi");
